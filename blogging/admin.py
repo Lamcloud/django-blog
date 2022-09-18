@@ -2,17 +2,21 @@ from django.contrib import admin
 
 from blogging.models import Post, Category
 
+
 class MembershipInline(admin.TabularInline):
     model = Category.posts.through
+
 
 class PostAdmin(admin.ModelAdmin):
     inlines = [
         MembershipInline,
     ]
 
+
 class CategoryAdmin(admin.ModelAdmin):
 
-    exclude = ('posts',)
+    exclude = ("posts",)
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
@@ -32,4 +36,3 @@ admin.site.register(Category, CategoryAdmin)
 #     exclude = ['posts']
 #
 # admin.site.register(Category, CategoryAdmin)
-

@@ -5,7 +5,7 @@ from django.http import Http404
 from polling.models import Poll
 
 
-#added 9/7/22
+# added 9/7/22
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
@@ -18,25 +18,30 @@ from django.views.generic.detail import DetailView
 #         context = {model_list_name: self.model.objects.all()}
 #         return render(request, self.template_name, context)
 
+
 class PollListView(ListView):  # assignment 08 will be for blogging
     model = Poll
-    template_name = 'polling/list.html'
+    template_name = "polling/list.html"
+
 
 # above added 9/7/22
 
 
 def list_view(request):
-    context = {'polls': Poll.objects.all()}
-    return render(request, 'polling/list.html', context)
+    context = {"polls": Poll.objects.all()}
+    return render(request, "polling/list.html", context)
 
 
-#added 9/7/22
+# added 9/7/22
+
 
 class PollDetailView(DetailView):
     model = Poll
-    template_name = 'polling/detail.html'
+    template_name = "polling/detail.html"
 
-    def post(self, request, *args, **kwargs):  # *args: on website http://127.0.0.1:8000/polling/polls/1, 1 is passed
+    def post(
+        self, request, *args, **kwargs
+    ):  # *args: on website http://127.0.0.1:8000/polling/polls/1, 1 is passed
         poll = self.get_object()
 
         if request.POST.get("vote") == "Yes":
